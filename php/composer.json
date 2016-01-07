@@ -1,0 +1,49 @@
+{  
+   "description":"A plugin for njsagent",
+   "homepage":"https://github.com/ckir/njsagent-rsscollector",
+   "keywords":[  
+      "njsagent",
+      "zf2"
+   ],
+   "license":"MIT",
+   "name":"njsagent-rsscollector",
+   "repositories":[  
+      {  
+         "type":"composer",
+         "url":"https://packages.zendframework.com/"
+      },
+      {  
+         "type":"vcs",
+         "url":"https://github.com/ckir/phpMultiLog.git"
+      },
+      {  
+         "type":"vcs",
+         "url":"https://github.com/mtibben/html2text.git"
+      }
+   ],
+   "require":{  
+      "ext-mbstring":"*",
+      "ext-memcached":"*",
+      "ext-redis":"*",
+      "ext-sqlite3":"*",
+      "ext-pdo_sqlite":"*",
+      "ckir/phpMultiLog":"dev-master",
+      "zendframework/zend-cache":"2.*",
+      "zendframework/zend-config":"2.*",
+      "zendframework/zend-db":"2.*",
+      "zendframework/zend-escaper":"2.*",
+      "zendframework/zend-feed":"2.*",
+      "zendframework/zend-filter":"2.*",
+      "zendframework/zend-http":"2.*",
+      "zendframework/zend-loader":"2.*",
+      "zendframework/zend-uri":"2.*",
+      "zendframework/zend-validator":"2.*",
+      "html2text/html2text":"dev-master",
+      "google/apiclient":"dev-master"
+   },
+   "autoload":{  
+      "files":[  
+
+      ]
+   }
+}

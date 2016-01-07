@@ -1,0 +1,26 @@
+{
+  "name": "njsagent-rsscollector",
+  "version": "1.0.0",
+  "description": "A plugin module for njsagent",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ckir/njsagent-rsscollector.git"
+  },
+  "author": "Costas Kirgoussios",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ckir/njsagent-rsscollector/issues"
+  },
+  "homepage": "https://github.com/ckir/njsagent-rsscollector#readme",
+  "dependencies": {
+    "bluebird": "^3.1.1",
+    "bunyan": "^1.5.1",
+    "cron": "^1.1.0",
+    "moment": "^2.11.0",
+    "node-bunyan-gcalendar": "^1.0.2"
+  }
+}
