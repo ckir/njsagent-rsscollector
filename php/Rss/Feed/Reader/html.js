@@ -1,0 +1,100 @@
+var utils = require('utils');
+var casper = require('casper').create({
+    //waitTimeout: 30000,
+    stepTimeout: 50000,
+    verbose: false,
+    pageSettings: {
+        loadImages: true, // The WebPage instance used by Casper will
+        loadPlugins: true, // use these settings
+        viewportSize: {
+            width: 1024,
+            height: 768
+        },
+        userAgent: 'Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.36'
+    }
+});
+
+var results = {};
+var s, e;
+
+casper.resourceTimeout = 25000;
+
+casper.onResourceTimeout = function(err) {
+    results.error = err;
+    console.log(JSON.stringify(results));
+  this.exit(1);
+};
+
+casper.on('error', function(err) {
+    results.error = err;
+    console.log(JSON.stringify(results));
+    this.exit(1);
+});
+
+casper.on('onTimeout', function() {
+    results.error = "timeout";
+});
+
+casper.on('load.failed', function(obj) {
+    results.error = err;
+    console.log(JSON.stringify(results));
+    this.exit(1);
+});
+
+casper.on('url.changed', function(url) {
+    results.redirectURL = url;
+});
+
+casper.on('step.error', function(err) {
+    results.error = err;
+    console.log(JSON.stringify(results));
+    this.exit(1);
+});
+
+casper.on('step.timeout', function(err) {
+    results.error = err;
+    console.log(JSON.stringify(results));
+    this.exit(1);
+});
+
+casper.on('load.started', function(requestData, request) {
+    //console.log("request url " + requestData.url);
+    if (typeof s === 'undefined'){
+        s = new Date().getTime();
+    }
+});
+
+casper.on('load.finished', function(response) {
+    //console.log("response url " + response.url);
+    e = new Date().getTime();
+    results.loadtime = (e - s);
+    results.http = this.currentResponse;
+});
+
+casper.start(casper.cli.get("url"));
+
+casper.run(function() {
+    var self = this;
+    var xpath = casper.cli.get("xpath");
+    if (xpath) {
+        try {
+            xpath = xpath.split(';');
+            xpath.forEach(function(xp) {
+                results.content = self.evaluate(function(xp) {
+                    var elements = __utils__.getElementsByXPath(xp);
+                    return [].map.call(elements, function(element) {
+                        return element.innerText;
+                    });
+                }, xpath);
+            });
+        } catch (err) {
+            results.error = err;
+        }
+    } else {
+        results.content = self.page.content;
+    }
+    setTimeout(function() {
+        console.log(JSON.stringify(results));
+        self.exit();
+    }, 2000);
+});
