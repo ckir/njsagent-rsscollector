@@ -22,6 +22,7 @@
     "casperjs": "^1.1.0-beta3",
     "cron": "^1.1.0",
     "moment": "^2.11.0",
-    "node-bunyan-gcalendar": "^1.0.2"
+    "node-bunyan-gcalendar": "^1.0.2",
+    "phantomjs": "^1.9.19"
   }
 }
