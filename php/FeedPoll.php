@@ -1,11 +1,11 @@
 <?php
 require_once ("Startup.php");
 
-$logger->logInfo ( __FILE__ . " started at " . date(DATE_ATOM));
-$logger->logInfo ("RSSCOLLECTOR_PGSQL=" . getenv("RSSCOLLECTOR_PGSQL"));
-$logger->logInfo ("RSSCOLLECTOR_MYSQL=" . getenv("RSSCOLLECTOR_MYSQL"));
-sleep(5);
-die();
+// $logger->logInfo ( __FILE__ . " started at " . date(DATE_ATOM));
+// $logger->logInfo ("RSSCOLLECTOR_PGSQL=" . getenv("RSSCOLLECTOR_PGSQL"));
+// $logger->logInfo ("RSSCOLLECTOR_MYSQL=" . getenv("RSSCOLLECTOR_MYSQL"));
+// sleep(5);
+// die();
 
 /**
  *
@@ -74,19 +74,19 @@ class FeedsPoll {
     } // function fetch_feeds
 } // class RssCron
 
-$postgresql = "pgsql://user:a@localhost:5432/rsszf210poll";
-$mysql = "mysql://root:1508Ckir_@127.0.0.1:3306/kirgoussios";
+// $postgresql = "pgsql://user:a@localhost:5432/rsszf210poll";
+// $mysql = "mysql://root:1508Ckir_@127.0.0.1:3306/kirgoussios";
 
-// $postgresql = getenv("RSSCOLLECTOR_PGSQL");
-// if (empty($postgresql)) {
-//     $logger->logError("Missing environment variable RSSCOLLECTOR_PGSQL");
-//     exit (1);
-// }
-// $mysql = getenv("RSSCOLLECTOR_MYSQL");
-// if (empty($mysql)) {
-//     $logger->logError("Missing environment variable RSSCOLLECTOR_MYSQL");
-//     exit (1);
-// }
+$postgresql = getenv("RSSCOLLECTOR_PGSQL");
+if (empty($postgresql)) {
+    $logger->logError("Missing environment variable RSSCOLLECTOR_PGSQL");
+    exit (1);
+}
+$mysql = getenv("RSSCOLLECTOR_MYSQL");
+if (empty($mysql)) {
+    $logger->logError("Missing environment variable RSSCOLLECTOR_MYSQL");
+    exit (1);
+}
 
 $logger->logDebug ( "Using Postgress at $postgresql and MySql at $mysql" );
 
