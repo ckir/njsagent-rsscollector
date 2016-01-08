@@ -1,11 +1,11 @@
 <?php
 require_once ("Startup.php");
 
-$logger->logInfo ( __FILE__ . " started at " . date(DATE_ATOM));
-$logger->logInfo ("RSSCOLLECTOR_PGSQL=" . getenv("RSSCOLLECTOR_PGSQL"));
-$logger->logInfo ("RSSCOLLECTOR_MYSQL=" . getenv("RSSCOLLECTOR_MYSQL"));
-sleep(5);
-die();
+// $logger->logInfo ( __FILE__ . " started at " . date(DATE_ATOM));
+// $logger->logInfo ("RSSCOLLECTOR_PGSQL=" . getenv("RSSCOLLECTOR_PGSQL"));
+// $logger->logInfo ("RSSCOLLECTOR_MYSQL=" . getenv("RSSCOLLECTOR_MYSQL"));
+// sleep(5);
+// die();
 
 /**
  *
@@ -73,9 +73,6 @@ class FeedsPoll {
         return $feeds;
     } // function fetch_feeds
 } // class RssCron
-
-// $postgresql = "pgsql://user:a@localhost:5432/rsszf210poll";
-// $mysql = "mysql://root:1508Ckir_@127.0.0.1:3306/kirgoussios";
 
 $postgresql = getenv("RSSCOLLECTOR_PGSQL");
 if (empty($postgresql)) {
