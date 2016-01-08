@@ -8,5 +8,6 @@ cd php
 composer install
 cd ..
 
-export PATH=$PATH:$NJSAGENT_APPROOT/workers/njsagent-rsscollector/node_modules/phantomjs/bin:$PATH:$NJSAGENT_APPROOT/workers/njsagent-rsscollector/node_modules/casperjs/bin
-
+#Put binaries to a path accesible folder
+ln -s $NJSAGENT_APPROOT/workers/njsagent-rsscollector/node_modules/phantomjs/bin/phantomjs /app/.heroku/node/bin
+ln -s $NJSAGENT_APPROOT/workers/njsagent-rsscollector/node_modules/casperjs/bin/casperjs /app/.heroku/node/bin
