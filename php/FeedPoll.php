@@ -85,7 +85,7 @@ if (empty($mysql)) {
     exit (1);
 }
 
-$logger->logDebug ( "Using Postgress at $postgresql and MySql at $mysql" );
+// $logger->logDebug ( "Using Postgress at $postgresql and MySql at $mysql" );
 
 $reader = new FeedsPoll($postgresql);
 $feeds = $reader->poll();

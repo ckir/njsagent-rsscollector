@@ -15,7 +15,7 @@ var bunyanoptions = {
         level: 'debug',
         stream: process.stdout
     }, {
-        level: 'trace',
+        level: 'debug',
         path: path.resolve(process.env.NJSAGENT_APPROOT + '/logs/' + appName + '.log'),
     }]
 };
@@ -141,7 +141,7 @@ function execPhpFile (file, args, options, nolog) {
                 if (!nolog) {
                     log.error('Failed to execute ' + file, error);
                 }
-                reject({
+                resolve({
                     file: file,
                     stderr: stderr
                 });
