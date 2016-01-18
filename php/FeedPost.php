@@ -225,7 +225,7 @@ class BloggerPost
 require_once 'RssArchive.php';
 require_once 'RssPostArchive.php';
 $archive = new RssArchive($postgresql);
-//$postarchive = new PostArchive();
+$postarchive = new PostArchive($postgresql);
 
 $oath = new \Rss\Apis\Google\Oath();
 $client = $oath->get_client();

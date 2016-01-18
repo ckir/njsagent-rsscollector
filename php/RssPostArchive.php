@@ -2,17 +2,22 @@
 class PostArchive {
 	protected $logger;
 	protected $db;
-	protected $insert = 'INSERT INTO `posts`(`id`, `published`, `url`, `selfLink`, `title`, `labels`) VALUES (?,?,?,?,?,?)';
+	protected $qryupsert = 'INSERT INTO collector (collector_date, collector_jdata) VALUES (DEFAULT, ?::jsonb) ON CONFLICT (collector_date) DO UPDATE set collector_jdata=jsonb_set(collector.collector_jdata::jsonb, \'{data,2147483647}\', ?::jsonb, true)';
 	
 	/**
 	 *
 	 * @param object $logger        	
 	 */
-	function __construct() {
-		global $logger;
-		$this->logger = $logger;
-		$this->db =  \Rss\Util\Db\MySQL::getPDO ( getenv("RSSCOLLECTOR_MYSQL") );
-		$this->insert = $this->db->prepare ( $this->insert );
+	function __construct($postgresql) {
+		try {
+			global $logger;
+			$this->logger = $logger;
+			$this->db = \Rss\Util\Db\PostgreSQL::getPDO ( $postgresql );
+			$this->qryupsert = $this->db->prepare ( $this->qryupsert );
+		} catch ( \Exception $e ) {
+			$m = 'Error connecting to PostgreSQL ' . $e->getCode () . ' ' . $e->getMessage () . ' ' . $e->getFile ();
+			$this->logger->logError ( $m );
+		}
 	} // function __construct
 	
 	/**
@@ -36,16 +41,15 @@ class PostArchive {
 				$tags = "Uncategorized";
 			}
 			
-			$this->insert->bindParam ( 1, $data ["id"], PDO::PARAM_INT );
-			$this->insert->bindParam ( 2, $published, PDO::PARAM_STR );
-			$this->insert->bindParam ( 3, $data ["url"], PDO::PARAM_STR );
-			$this->insert->bindParam ( 4, $data ["selfLink"], PDO::PARAM_STR );
-			$this->insert->bindParam ( 5, $data ["title"], PDO::PARAM_STR );
-			$this->insert->bindParam ( 6, $tags, PDO::PARAM_STR );
-			$this->insert->execute ();
+			$record = array('id' => $data ["id"], 'published' => $published, 'url' => $data ["url"], 'selfLink' => $data ["selfLink"], 'title' => $data ["title"], 'labels' => $tags, 'ts' => date ( "Y-m-d H:i:s", $published ));
+			$record = json_encode($record);
+			
+			$this->qryupsert->bindParam ( 1, $record, PDO::PARAM_STR );
+			$this->qryupsert->bindParam ( 2, $record, PDO::PARAM_STR );
+			$this->qryupsert->execute ();
 			return true;
 		} catch ( \Exception $e ) {
-			$m = 'Error writing (' . json_encode ( $data ) . ') to database ' . $e->getCode () . ' ' . $e->getMessage ();
+			$m = 'Error writing (' . $record . ') to database ' . $e->getCode () . ' ' . $e->getMessage ();
 			$this->logger->logError ( $m );
 			return false;
 		}
