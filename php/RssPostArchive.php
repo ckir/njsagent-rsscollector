@@ -43,7 +43,7 @@ class PostArchive {
 			
 			$record = array('id' => $data ["id"], 'published' => $published, 'url' => $data ["url"], 'selfLink' => $data ["selfLink"], 'title' => $data ["title"], 'labels' => $tags, 'ts' => date ( "Y-m-d H:i:s", $published ));
 			$record = json_encode($record);
-			$record = $this->db->quote($record);
+
 			$this->qryupsert->bindParam ( 1, $record, PDO::PARAM_STR );
 			$this->qryupsert->bindParam ( 2, $record, PDO::PARAM_STR );
 			$this->qryupsert->execute ();

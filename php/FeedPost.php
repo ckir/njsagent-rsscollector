@@ -256,10 +256,10 @@ foreach ($articles as $filename) {
             $t = $post["title"];
             $logger->logDebug("Archived article from ($h) [$t]");
         }
-//         if ($postarchive->insert($posted)) {
-//             $id = $posted["id"];
-//             $logger->logDebug("Archived post id ($id) from ($h) [$t]");
-//         }
+        if ($postarchive->insert($posted)) {
+            $id = $posted["id"];
+            $logger->logDebug("Archived post id ($id) from ($h) [$t]");
+        }
     } else {
         $logger->logWarn("Error posting article ($filename)", $post);
     }
