@@ -162,7 +162,9 @@ function promiseWhile(condition, action) {
     var resolver = Promise.defer();
 
     var loop = function() {
-        if (!condition()) return resolver.resolve();       
+        if (!condition()) {
+            return resolver.resolve();
+        }
         return Promise.cast(action())
             .then(loop)
             .catch(resolver.reject);
@@ -171,4 +173,4 @@ function promiseWhile(condition, action) {
     process.nextTick(loop);
 
     return resolver.promise;
-};
+}
