@@ -176,7 +176,7 @@ class BloggerPost
      */
     private function articletail($link)
     {
-        $tail = '<div style="text-align: center;"><br /><table border="0" style="margin-left: auto; margin-right: auto; text-align: left;"><tbody><tr><td align="center"><a href="LINK" target="_blank"><img height="64" src="http://tests-for-my-class.googlecode.com/git/Rss/GoRead64x64.png" width="64" /></a></td></tr><tr><td align="center"><b>READ THE ORIGINAL POST AT NEWSSITE</b></td></tr></tbody></table></div>';
+        $tail = '<div style="text-align: center;"><br /><table border="0" style="margin-left: auto; margin-right: auto; text-align: left;"><tbody><tr><td align="center"><a href="LINK" target="_blank"><img height="64" src="//ckir-static-assets.s3.amazonaws.com/Rss/GoRead64x64.png" width="64" /></a></td></tr><tr><td align="center"><b>READ THE ORIGINAL POST AT NEWSSITE</b></td></tr></tbody></table></div>';
         $l = parse_url($link);
         $tail = preg_replace('/LINK/', $link, $tail);
         $tail = preg_replace('/NEWSSITE/', $l['host'], $tail);
