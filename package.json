@@ -17,12 +17,13 @@
   },
   "homepage": "https://github.com/ckir/njsagent-rsscollector#readme",
   "dependencies": {
-    "bluebird": "^3.1.1",
-    "bunyan": "^1.5.1",
-    "casperjs": "^1.1.0-beta3",
-    "cron": "^1.1.0",
-    "moment": "^2.11.0",
-    "node-bunyan-gcalendar": "^1.0.2",
-    "phantomjs": "^1.9.19"
+    "bluebird": "^3.5.1",
+    "bunyan": "^1.8.12",
+    "casperjs": "^1.1.4",
+    "cron": "^1.3.0",
+    "moment": "^2.18.1",
+    "node-bunyan-gcalendar": "^1.0.4",
+    "phantomjs-prebuilt": "^2.1.15",
+    "socket.io": "^0.9.17"
   }
 }
