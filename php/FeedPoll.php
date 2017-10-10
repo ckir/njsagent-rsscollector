@@ -63,7 +63,6 @@ class FeedsPoll {
         // Add standard feeds
         $feeds [] = "http://www.google.com/alerts/feeds/07177147464394752526/1472770238304804822";
         $feeds [] = "http://www.google.com/alerts/feeds/07177147464394752526/1063701502445133856";
-        $feeds [] = "https://uk.news.yahoo.com/rss/europe";
         $feeds [] = "http://www.bing.com/news/search?q=greece&qs=n&form=NWBQBN&pq=greece&sc=8-6&sp=-1&sk=&format=RSS";
         $feeds [] = "http://www.bing.com/news/search?q=greek&qs=n&form=NWBQBN&pq=greece&sc=8-6&sp=-1&sk=&format=RSS";
 
