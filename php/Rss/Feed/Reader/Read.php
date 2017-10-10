@@ -95,7 +95,7 @@ class Read {
 			);
 		} catch ( \Exception $e ) {
 			$this->logger->logWarn ( "Zend feed reader cannot fetch: ($uri) because : " . $e->getMessage () . " trying casperjs" );
-			$command = 'casperjs ' . __DIR__ . '/html.js --cookies-file=cookies.txt --url=' . escapeshellarg($uri);
+			$command = 'timeout -k 90 -s SIGTERM 90 casperjs ' . __DIR__ . '/html.js --cookies-file=cookies.txt --url=' . escapeshellarg($uri);
 			exec ( $command, $response, $return_var );
 			$response = $this->strip_json ( $response );
 			if (($return_var !== 0) || (! isset ( $response ['content'] )) || empty ( $response ['content'] )) {
