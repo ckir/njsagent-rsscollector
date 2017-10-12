@@ -42,8 +42,9 @@ class HTMLReader {
 		}
 		
 		// First test if url is responding
-		$this->logger->logDebug ( "Testing if ($uri) is responding" );
+		
 		$command = 'timeout -k 90 -s SIGTERM 90 casperjs ' . __DIR__ . '/html.js --cookies-file=cookies.txt --url=' . escapeshellarg ( $uri );
+		$this->logger->logDebug ( "Testing if ($uri) is responding " . $command);
 		exec ( $command, $response, $return_var );
 		$response = $this->strip_json ( $response );
 		
@@ -103,11 +104,11 @@ class HTMLReader {
 		}
 		
 		// We will use casperjs to retrieve dynamically generated content
-		$this->logger->logDebug ( "Reloading ($redirectURL) to get ($xpath)" );
 		$response = null;
 		$return_var = null;
 		sleep ( 1 );
 		$command = 'timeout -k 90 -s SIGTERM 90 casperjs ' . __DIR__ . '/html.js --cookies-file=cookies.txt --url=' . escapeshellarg ( $redirectURL ) . ' --xpath=' . escapeshellarg ( $xpath );
+		$this->logger->logDebug ( "Reloading ($redirectURL) to get ($xpath) " . $command );
 		exec ( $command, $response, $return_var );
 		$response = $this->strip_json ( $response );
 		if (! isset ( $response ["loadtime"] )) {
