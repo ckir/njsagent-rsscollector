@@ -22,13 +22,13 @@ casper.resourceTimeout = 25000;
 casper.onResourceTimeout = function(err) {
     results.error = err;
     console.log(JSON.stringify(results));
-  this.exit(1);
+  this.exit(2);
 };
 
 casper.on('error', function(err) {
     results.error = err;
     console.log(JSON.stringify(results));
-    this.exit(1);
+    this.exit(3);
 });
 
 casper.on('onTimeout', function() {
@@ -38,7 +38,7 @@ casper.on('onTimeout', function() {
 casper.on('load.failed', function(obj) {
     results.error = err;
     console.log(JSON.stringify(results));
-    this.exit(1);
+    this.exit(4);
 });
 
 casper.on('url.changed', function(url) {
@@ -48,13 +48,13 @@ casper.on('url.changed', function(url) {
 casper.on('step.error', function(err) {
     results.error = err;
     console.log(JSON.stringify(results));
-    this.exit(1);
+    this.exit(5);
 });
 
 casper.on('step.timeout', function(err) {
     results.error = err;
     console.log(JSON.stringify(results));
-    this.exit(1);
+    this.exit(6);
 });
 
 casper.on('load.started', function(requestData, request) {
