@@ -43,7 +43,7 @@ class HTMLReader {
 		
 		// First test if url is responding
 		
-		$command = 'timeout -k 90 -s SIGTERM 90 casperjs ' . __DIR__ . '/html.js --cookies-file=cookies.txt --url=' . escapeshellarg ( $uri );
+		$command = 'timeout --preserve-status -k 90 -s SIGTERM 90 casperjs ' . __DIR__ . '/html.js --cookies-file=cookies.txt --url=' . escapeshellarg ( $uri );
 		$this->logger->logDebug ( "Testing if ($uri) is responding " . $command);
 		exec ( $command, $response, $return_var );
 		$response = $this->strip_json ( $response );
