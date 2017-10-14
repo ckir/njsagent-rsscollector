@@ -44,7 +44,7 @@ class HTMLReader {
 		// First test if url is responding
 		
 		// $command = 'timeout --preserve-status -k 90 -s SIGTERM 90 casperjs ' . __DIR__ . '/html.js --cookies-file=cookies.txt --url=' . escapeshellarg ( $uri );
-		$command = 'cd ' . __DIR__ . '; timeout --preserve-status -k 90 -s SIGTERM 90 casperjs html.js --cookies-file=cookies.txt --url=' . escapeshellarg ( $uri );
+		$command = 'cd ' . __DIR__ . '; timeout -k 90 -s SIGTERM 90 casperjs html.js --cookies-file=cookies.txt --url=' . escapeshellarg ( $uri );
 
 		$this->logger->logDebug ( "Testing if ($uri) is responding " . $command);
 		exec ( $command, $response, $return_var );
@@ -109,7 +109,8 @@ class HTMLReader {
 		$response = null;
 		$return_var = null;
 		sleep ( 1 );
-		$command = 'timeout -k 90 -s SIGTERM 90 casperjs ' . __DIR__ . '/html.js --cookies-file=cookies.txt --url=' . escapeshellarg ( $redirectURL ) . ' --xpath=' . escapeshellarg ( $xpath );
+		// $command = 'timeout -k 90 -s SIGTERM 90 casperjs ' . __DIR__ . '/html.js --cookies-file=cookies.txt --url=' . escapeshellarg ( $redirectURL ) . ' --xpath=' . escapeshellarg ( $xpath );
+		$command = 'cd ' . __DIR__ . '; timeout -k 90 -s SIGTERM 90 casperjs html.js --cookies-file=cookies.txt --url=' . escapeshellarg ($redirectURL) . ' --xpath=' . escapeshellarg ( $xpath );
 		$this->logger->logDebug ( "Reloading ($redirectURL) to get ($xpath) " . $command );
 		exec ( $command, $response, $return_var );
 		$response = $this->strip_json ( $response );
